@@ -30,6 +30,8 @@ echo "Copy cross-compiler-armv6l.tar.bz2 to /etc/xcompile"
 cp cross-compiler-armv6l.tar.bz2 /etc/xcompile/cross-compiler-armv6l.tar.bz2
 echo "Copy cross-compiler-i586.tar.bz2 to /etc/xcompile"
 cp cross-compiler-i586.tar.bz2 /etc/xcompile/cross-compiler-i586.tar.bz2
+echo "Copy cross-compiler-i686.tar.bz2 to /etc/xcompile"
+cp cross-compiler-i686.tar.bz2 /etc/xcompile/cross-compiler-i686.tar.bz2
 echo "Copy cross-compiler-m68k.tar.bz2 to /etc/xcompile"
 cp cross-compiler-m68k.tar.bz2 /etc/xcompile/cross-compiler-m68k.tar.bz2
 echo "Copy cross-compiler-mips.tar.bz2 to /etc/xcompile"
@@ -52,6 +54,8 @@ echo "extracting cross-compiler-armv6l.tar.bz2 ..."
 tar -jxf cross-compiler-armv6l.tar.bz2
 echo "extracting cross-compiler-i586.tar.bz2 ..."
 tar -jxf cross-compiler-i586.tar.bz2
+echo "extracting cross-compiler-i686.tar.bz2 ..."
+tar -jxf cross-compiler-i686.tar.bz2
 echo "extracting cross-compiler-m68k.tar.bz2 ..."
 tar -jxf cross-compiler-m68k.tar.bz2
 echo "extracting cross-compiler-mips.tar.bz2 ..."
@@ -75,6 +79,8 @@ echo "move cross-compiler-armv6l to armv6l ..."
 mv cross-compiler-armv6l armv6l
 echo "move cross-compiler-i586 to i586 ..."
 mv cross-compiler-i586 i586
+echo "move cross-compiler-i686 to i686 ..."
+mv cross-compiler-i686 i686
 echo "move cross-compiler-m68k to m68k ..."
 mv cross-compiler-m68k m68k
 echo "move cross-compiler-mips to mips ..."
@@ -93,6 +99,7 @@ export PATH=$PATH:/etc/xcompile/armv4l/bin
 export PATH=$PATH:/etc/xcompile/armv5l/bin
 export PATH=$PATH:/etc/xcompile/armv6l/bin
 export PATH=$PATH:/etc/xcompile/i586/bin
+export PATH=$PATH:/etc/xcompile/i686/bin
 export PATH=$PATH:/etc/xcompile/m68k/bin
 export PATH=$PATH:/etc/xcompile/mips/bin
 export PATH=$PATH:/etc/xcompile/mipsel/bin
