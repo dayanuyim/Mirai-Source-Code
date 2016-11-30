@@ -25,7 +25,7 @@ func NewDatabase(dbAddr string, dbUser string, dbPassword string, dbName string)
     fmt.Println("Opening " + dbpath)
     db, err := sql.Open("mysql", dbpath)
     if err != nil {
-        fmt.Println(err)
+        fmt.Println("Open " + dbpath + " error: " + err.Error())
     }
     fmt.Println("Mysql DB opened")
     return &Database{db}
@@ -34,11 +34,12 @@ func NewDatabase(dbAddr string, dbUser string, dbPassword string, dbName string)
 func (this *Database) TryLogin(username string, password string) (bool, AccountInfo) {
     rows, err := this.db.Query("SELECT username, max_bots, admin FROM users WHERE username = ? AND password = ? AND (wrc = 0 OR (UNIX_TIMESTAMP() - last_paid < `intvl` * 24 * 60 * 60))", username, password)
     if err != nil {
-        fmt.Println(err)
+        fmt.Println("tryLogin error: " + err.Error())
         return false, AccountInfo{"", 0, 0}
     }
     defer rows.Close()
     if !rows.Next() {
+        fmt.Println("No username/password found")
         return false, AccountInfo{"", 0, 0}
     }
     var accInfo AccountInfo
