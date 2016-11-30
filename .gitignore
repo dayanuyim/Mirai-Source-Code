@@ -1,0 +1,5 @@
+release
+debug
+cross-compile-bin/*.tar.*
+loader/loader
+loader/loader.dbg
