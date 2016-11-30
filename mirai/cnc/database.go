@@ -21,7 +21,9 @@ type AccountInfo struct {
 }
 
 func NewDatabase(dbAddr string, dbUser string, dbPassword string, dbName string) *Database {
-    db, err := sql.Open("mysql", fmt.Sprintf("%s:%s@tcp(%s)/%s", dbUser, dbPassword, dbAddr, dbName))
+    dbpath := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s", dbUser, dbPassword, dbAddr, 3306, dbName)
+    fmt.Println("Opening " + dbpath)
+    db, err := sql.Open("mysql", dbpath)
     if err != nil {
         fmt.Println(err)
     }
